@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poke_fly/models/pokemon.dart';
 import 'package:poke_fly/models/type_color.dart';
+import 'package:poke_fly/utils/string_extension.dart';
 
 class PokemonCard extends StatelessWidget {
   final Pokemon pokemon;
@@ -26,12 +27,9 @@ class PokemonCard extends StatelessWidget {
         padding: EdgeInsets.all(4),
         child: Row(
           children: <Widget>[
-            Icon(
-              Icons.person,
-              color: Theme.of(context).primaryColor,
-            ),
+            // add icons here for future improvement
             Text(
-              type,
+              type.firstLetterCapitalize(),
               style: TextStyle(color: Theme.of(context).primaryColor),
             ),
           ],
@@ -53,7 +51,7 @@ class PokemonCard extends StatelessWidget {
               onTap: () {
                 print('LOL');
               },
-              splashColor: Colors.lightGreen,
+              splashColor: _getCardColor(),
               borderRadius: BorderRadius.circular(25),
               child: Card(
                 color: _getCardColor(),
@@ -66,12 +64,15 @@ class PokemonCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text('#${pokemon.id.toString()}'),
-                      Text(
-                        pokemon.name,
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Text(
+                          pokemon.name,
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).primaryColor,
+                          ),
                         ),
                       ),
                       Row(

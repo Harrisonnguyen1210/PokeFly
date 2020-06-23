@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:poke_fly/models/pokemon.dart';
 import 'package:http/http.dart' as http;
+import 'package:poke_fly/utils/string_extension.dart';
 
 class PokemonsProvider extends ChangeNotifier {
   List<Pokemon> _pokemons = [];
@@ -29,8 +30,7 @@ class PokemonsProvider extends ChangeNotifier {
       });
       pokemonList.add(Pokemon(
         id: pokemonJson['id'],
-        name: pokemonJson['name'][0].toUpperCase() +
-            pokemonJson['name'].substring(1),
+        name: pokemonJson['name'].toString().firstLetterCapitalize(),
         height: pokemonJson['height'],
         types: pokemonTypes,
       ));
