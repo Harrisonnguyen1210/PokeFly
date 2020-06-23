@@ -29,7 +29,8 @@ class PokemonsProvider extends ChangeNotifier {
       });
       pokemonList.add(Pokemon(
         id: pokemonJson['id'],
-        name: pokemonJson['name'],
+        name: pokemonJson['name'][0].toUpperCase() +
+            pokemonJson['name'].substring(1),
         height: pokemonJson['height'],
         types: pokemonTypes,
       ));

@@ -1,11 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:poke_fly/models/pokemon.dart';
-import 'package:poke_fly/widgets/type_tags.dart';
+import 'package:poke_fly/models/type_color.dart';
 
 class PokemonCard extends StatelessWidget {
   final Pokemon pokemon;
 
   PokemonCard(this.pokemon);
+
+  Color _getCardColor() {
+    return TypeColor.typeColors[pokemon.types[0]] != null ? TypeColor.typeColors[pokemon.types[0]][0] : TypeColor.typeColors['normal'][0];
+  }
+
+  Color _getTypeColor(String type) {
+    return TypeColor.typeColors[type] != null ? TypeColor.typeColors[type][1] : TypeColor.typeColors['normal'][1];
+  }
+
+  List<Widget> _buildTypeTags(BuildContext context) {
+    return pokemon.types.map(
+      (type) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          color: _getTypeColor(type),
+        ),
+        margin: EdgeInsets.only(top: 8, right: 8),
+        padding: EdgeInsets.all(4),
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.person,
+              color: Theme.of(context).primaryColor,
+            ),
+            Text(
+              type,
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+          ],
+        ),
+      ),
+    ).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +56,7 @@ class PokemonCard extends StatelessWidget {
               splashColor: Colors.lightGreen,
               borderRadius: BorderRadius.circular(25),
               child: Card(
-                color: Colors.green,
+                color: _getCardColor(),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
                 elevation: 10,
@@ -32,16 +65,18 @@ class PokemonCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('#01'),
+                      Text('#${pokemon.id.toString()}'),
                       Text(
-                        'Kakuna',
+                        pokemon.name,
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).primaryColor,
                         ),
                       ),
-                      TypeTags(),
+                      Row(
+                        children: <Widget>[..._buildTypeTags(context)],
+                      ),
                     ],
                   ),
                 ),
