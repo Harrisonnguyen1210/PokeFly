@@ -20,22 +20,26 @@ class PokemonsProvider extends ChangeNotifier {
     final List<Pokemon> pokemonList = [];
     for (var pokemon in flyingPokeJson.sublist(0, 30)) {
       final pokemonUrl = pokemon['pokemon']['url'];
-      final pokemonResponse = await http.get(pokemonUrl);
-      final pokemonJson =
-          json.decode(pokemonResponse.body) as Map<String, dynamic>;
-      final typesResponse = pokemonJson['types'] as List<dynamic>;
-      final List<String> pokemonTypes = [];
-      typesResponse.forEach((type) {
-        pokemonTypes.add(type['type']['name']);
-      });
-      pokemonList.add(Pokemon(
-        id: pokemonJson['id'],
-        name: pokemonJson['name'].toString().firstLetterCapitalize(),
-        height: pokemonJson['height'],
-        types: pokemonTypes,
-      ));
+      pokemonList.add(await _fetchPokemon(pokemonUrl));
     }
     _pokemons = pokemonList;
     notifyListeners();
+  }
+
+  Future<Pokemon> _fetchPokemon(String pokemonUrl) async {
+    final pokemonResponse = await http.get(pokemonUrl);
+    final pokemonJson =
+        json.decode(pokemonResponse.body) as Map<String, dynamic>;
+    final typesResponse = pokemonJson['types'] as List<dynamic>;
+    final List<String> pokemonTypes = [];
+    typesResponse.forEach((type) {
+      pokemonTypes.add(type['type']['name']);
+    });
+    return Pokemon(
+      id: pokemonJson['id'],
+      name: pokemonJson['name'].toString().firstLetterCapitalize(),
+      height: pokemonJson['height'],
+      types: pokemonTypes,
+    );
   }
 }

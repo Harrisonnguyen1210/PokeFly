@@ -49,7 +49,7 @@ class PokemonCard extends StatelessWidget {
             padding: EdgeInsets.only(top: 24),
             child: InkWell(
               onTap: () {
-                print('LOL');
+                // navigate to detail screen
               },
               splashColor: _getCardColor(),
               borderRadius: BorderRadius.circular(25),
