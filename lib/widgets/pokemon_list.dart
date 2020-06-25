@@ -12,7 +12,7 @@ class PokemonList extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: pokemons.length,
-      itemBuilder: (context, index) => PokemonCard(pokemons[index]),
+      itemBuilder: (context, index) => ChangeNotifierProvider.value(value: pokemons[index], child: PokemonCard()),
     );
   }
 }

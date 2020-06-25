@@ -3,6 +3,7 @@ import 'package:poke_fly/providers/auth_provider.dart';
 import 'package:poke_fly/providers/pokemons_provider.dart';
 import 'package:poke_fly/routes.dart';
 import 'package:poke_fly/screens/auth_screen.dart';
+import 'package:poke_fly/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -28,7 +29,10 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
-        home: AuthScreen(),
+        home: Consumer<AuthProvider>(
+          builder: (context, authProvider, child) =>
+              authProvider.isAuth ? HomeScreen() : AuthScreen(),
+        ),
         routes: routes,
       ),
     );

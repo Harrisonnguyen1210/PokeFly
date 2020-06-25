@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poke_fly/providers/pokemons_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:poke_fly/widgets/pokemonList.dart';
+import 'package:poke_fly/widgets/pokemon_list.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
