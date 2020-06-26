@@ -16,11 +16,16 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (buildContext) => PokemonsProvider(),
-        ),
-        ChangeNotifierProvider(
           create: (buildContext) => AuthProvider(),
-        )
+        ),
+        ChangeNotifierProxyProvider<AuthProvider, PokemonsProvider>(
+          create: (buildContext) => PokemonsProvider(),
+          update: (buildContext, authProvider, pokemonsProvider) {
+            pokemonsProvider.updateToken(authProvider.token);
+            pokemonsProvider.updateUserId(authProvider.userId);
+            return pokemonsProvider;
+          },
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

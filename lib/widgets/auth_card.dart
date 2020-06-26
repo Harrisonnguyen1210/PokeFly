@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poke_fly/providers/auth_provider.dart';
+import 'package:poke_fly/utils/error_dialog.dart';
 import 'package:provider/provider.dart';
 
 enum AuthMode { Signup, Signin }
@@ -37,23 +38,6 @@ class _AuthCardState extends State<AuthCard>
     );
   }
 
-  void _showErrorDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('An error occurred'),
-        content: Text(message),
-        actions: <Widget>[
-          FlatButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Okay'))
-        ],
-      ),
-    );
-  }
-
   void _switchAuthMode() {
     if (_authMode == AuthMode.Signin) {
       setState(() {
@@ -82,7 +66,7 @@ class _AuthCardState extends State<AuthCard>
         await authProvider.signUp(_authData['email'], _authData['password']);
       }
     } catch (error) {
-      _showErrorDialog(error.toString());
+      ErrorDialog.showErrorDialog(context);
     }
     setState(() {
       _isLoading = false;

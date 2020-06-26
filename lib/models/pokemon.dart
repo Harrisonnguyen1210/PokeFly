@@ -20,18 +20,18 @@ class Pokemon extends ChangeNotifier {
 
   Future<void> toggleFavouriteStatus(String token, String userId) async {
     final url =
-        'https://pokefly-31860.firebaseio.com/userFavourites/$userId/$id.json?auth=$token';
+        'https://pokefly-31860.firebaseio.com/userFavourites/$userId/${id.toString()}.json?auth=$token';
+    isFavourite = !isFavourite;
     try {
       final response = await http.put(
         url,
         body: json.encode(isFavourite),
       );
       if (response.statusCode >= 400) {
-        throw Exception();
-      } else {
         isFavourite = !isFavourite;
-        notifyListeners();
+        throw Exception();
       }
+      notifyListeners();
     } catch (e) {
       throw e;
     }

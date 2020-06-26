@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poke_fly/providers/pokemons_provider.dart';
+import 'package:poke_fly/utils/error_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:poke_fly/widgets/pokemon_list.dart';
 
@@ -15,13 +16,17 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _isLoadingPokemons = true;
-    Provider.of<PokemonsProvider>(context, listen: false)
-        .fetchPokemons()
-        .then((_) {
-      setState(() {
-        _isLoadingPokemons = false;
+    try {
+      Provider.of<PokemonsProvider>(context, listen: false)
+          .fetchPokemons()
+          .then((_) {
+        setState(() {
+          _isLoadingPokemons = false;
+        });
       });
-    });
+    } catch (e) {
+      ErrorDialog.showErrorDialog(context);
+    }
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:poke_fly/models/pokemon.dart';
 import 'package:poke_fly/models/type_color.dart';
 import 'package:poke_fly/providers/auth_provider.dart';
 import 'package:poke_fly/screens/detail_screen.dart';
+import 'package:poke_fly/utils/error_dialog.dart';
 import 'package:poke_fly/utils/string_extension.dart';
 import 'package:provider/provider.dart';
 
@@ -41,23 +42,6 @@ class PokemonCard extends StatelessWidget {
           ),
         )
         .toList();
-  }
-
-  void _showErrorDialog(String message, BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('An error occurred'),
-        content: Text(message),
-        actions: <Widget>[
-          FlatButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Okay'))
-        ],
-      ),
-    );
   }
 
   void _showInSnackBar(BuildContext context, Pokemon pokemon) {
@@ -150,7 +134,7 @@ class PokemonCard extends StatelessWidget {
                       authProvider.token, authProvider.userId);
                   _showInSnackBar(context, pokemon);
                 } catch (error) {
-                  _showErrorDialog(error.toString(), context);
+                  ErrorDialog.showErrorDialog(context);
                 }
               },
               icon: Icon(
