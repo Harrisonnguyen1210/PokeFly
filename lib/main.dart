@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poke_fly/providers/auth_provider.dart';
+import 'package:poke_fly/providers/category_provider.dart';
 import 'package:poke_fly/providers/pokemons_provider.dart';
 import 'package:poke_fly/routes.dart';
 import 'package:poke_fly/screens/auth_screen.dart';
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (buildContext) => AuthProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (buildContext) => CategoryProvider(),
         ),
         ChangeNotifierProxyProvider<AuthProvider, PokemonsProvider>(
           create: (buildContext) => PokemonsProvider(),

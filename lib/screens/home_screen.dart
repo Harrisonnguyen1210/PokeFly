@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poke_fly/providers/pokemons_provider.dart';
 import 'package:poke_fly/utils/error_dialog.dart';
+import 'package:poke_fly/widgets/category_carousel.dart';
 import 'package:provider/provider.dart';
 import 'package:poke_fly/widgets/pokemon_list.dart';
 
@@ -39,6 +40,26 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             : Stack(
                 children: <Widget>[
+                  Container(
+                    width: double.infinity,
+                    child: ShaderMask(
+                      shaderCallback: (rect) {
+                        return LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.black, Colors.transparent],
+                        ).createShader(
+                          Rect.fromLTRB(0, 0, rect.width, rect.height),
+                        );
+                      },
+                      blendMode: BlendMode.dstIn,
+                      child: Image(
+                        image: AssetImage(
+                            'assets/images/pokemon_ball_background.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                   ListView(
                     children: <Widget>[
                       Padding(
@@ -64,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         child: Text('Gotta catch \'em all!'),
                       ),
+                      CategoryCarousel(),
                       PokemonList()
                     ],
                   ),
