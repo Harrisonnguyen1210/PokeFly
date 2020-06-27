@@ -65,7 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: _isLoadingPokemons
             ? Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                ),
               )
             : Stack(
                 children: <Widget>[

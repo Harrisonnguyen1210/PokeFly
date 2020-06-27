@@ -179,7 +179,9 @@ class _AuthCardState extends State<AuthCard>
           height: 24,
         ),
         _isLoading
-            ? CircularProgressIndicator()
+            ? CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+              )
             : Container(
                 width: double.infinity,
                 child: RaisedButton(

@@ -1,16 +1,19 @@
-# poke_fly
+# PokéFly
 
-A new Flutter project.
+A Flutter application demonstrating a coding challenging to display list of flying Pokemon using https://pokeapi.co/ api
 
-## Getting Started
+Feature: 
+- User sign in, sign up, log out
+- Pokemon favorite interaction
+- Flying Pokemon list
+- Pokemon details
 
-This project is a starting point for a Flutter application.
+How to install:
+Download app's apk at: https://appsenjoy.com/files/2b57a98039362416accc1c830426a7df.apk
 
-A few resources to get you started if this is your first Flutter project:
+Login to the app by: email - test@gmail.com, password - 123456
+or sign up your own account
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## App demo
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Link to app's demo: https://www.youtube.com/watch?v=b7ptCuoA-0g
