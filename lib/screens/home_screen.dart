@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poke_fly/providers/auth_provider.dart';
 import 'package:poke_fly/providers/pokemons_provider.dart';
 import 'package:poke_fly/utils/error_dialog.dart';
 import 'package:poke_fly/widgets/category_carousel.dart';
@@ -28,6 +29,34 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       ErrorDialog.showErrorDialog(context);
     }
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Do you want to logout?'),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Cancel'),
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushReplacementNamed('/');
+              Provider.of<AuthProvider>(
+                context,
+                listen: false,
+              ).logout();
+            },
+            child: Text('Logout'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -69,12 +98,26 @@ class _HomeScreenState extends State<HomeScreen> {
                           left: 24,
                           right: 24,
                         ),
-                        child: Text(
-                          'PokéFly',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              'PokéFly',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            RaisedButton(
+                              onPressed: () => _showLogoutDialog(context),
+                              child: Text('Logout'),
+                              color: Colors.blue[300],
+                              textColor: Theme.of(context).primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Padding(
