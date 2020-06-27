@@ -65,7 +65,8 @@ class PokemonsProvider extends ChangeNotifier {
       return Pokemon(
         id: pokemonJson['id'],
         name: pokemonJson['name'].toString().firstLetterCapitalize(),
-        height: pokemonJson['height'],
+        weight: pokemonJson['weight'] * 0.1,
+        height: pokemonJson['height'] * 10,
         types: pokemonTypes,
         isFavourite: favouriteJson == null
             ? false

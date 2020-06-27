@@ -4,7 +4,7 @@ import 'package:poke_fly/models/type_color.dart';
 import 'package:poke_fly/providers/auth_provider.dart';
 import 'package:poke_fly/screens/detail_screen.dart';
 import 'package:poke_fly/utils/error_dialog.dart';
-import 'package:poke_fly/utils/string_extension.dart';
+import 'package:poke_fly/widgets/type_tag.dart';
 import 'package:provider/provider.dart';
 
 class PokemonCard extends StatelessWidget {
@@ -14,32 +14,10 @@ class PokemonCard extends StatelessWidget {
         : TypeColor.typeColors['normal'][0];
   }
 
-  Color _getTypeColor(String type) {
-    return TypeColor.typeColors[type] != null
-        ? TypeColor.typeColors[type][1]
-        : TypeColor.typeColors['normal'][1];
-  }
-
   List<Widget> _buildTypeTags(BuildContext context, Pokemon pokemon) {
     return pokemon.types
         .map(
-          (type) => Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: _getTypeColor(type),
-            ),
-            margin: EdgeInsets.only(top: 8, right: 8),
-            padding: EdgeInsets.all(4),
-            child: Row(
-              children: <Widget>[
-                // add icons here for future improvement
-                Text(
-                  type.firstLetterCapitalize(),
-                  style: TextStyle(color: Theme.of(context).primaryColor),
-                ),
-              ],
-            ),
-          ),
+          (type) => TypeTag(type)
         )
         .toList();
   }
@@ -58,7 +36,6 @@ class PokemonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final pokemon = Provider.of<Pokemon>(context);
     final authProvider = Provider.of<AuthProvider>(context);
-    final mediaQuery = MediaQuery.of(context);
 
     return Container(
       height: 180,

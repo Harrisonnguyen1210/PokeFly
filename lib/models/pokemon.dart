@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 class Pokemon extends ChangeNotifier {
   final int id;
   final String name;
-  final int height;
+  final num height;
+  final num weight;
   final List<String> types;
   bool isFavourite;
 
@@ -15,6 +16,7 @@ class Pokemon extends ChangeNotifier {
     @required this.name,
     @required this.height,
     @required this.types,
+    @required this.weight,
     this.isFavourite = false,
   });
 
