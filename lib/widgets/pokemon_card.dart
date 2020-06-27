@@ -58,11 +58,12 @@ class PokemonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final pokemon = Provider.of<Pokemon>(context);
     final authProvider = Provider.of<AuthProvider>(context);
-
-    final deviceSize = MediaQuery.of(context).size;
+    final mediaQuery = MediaQuery.of(context);
+    final deviceSize = mediaQuery.size;
+    final _isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     return Container(
-      height: deviceSize.height / 5,
+      height: _isLandscape ? 180 : deviceSize.height / 5,
       margin: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
       child: Stack(
         children: <Widget>[
