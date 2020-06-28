@@ -9,10 +9,10 @@ Feature:
 - Pokemon details
 
 How to install:
-Download app's apk at: https://appsenjoy.com/files/2b57a98039362416accc1c830426a7df.apk
+Download app's apk at: https://appsenjoy.com/files/307f3038fd84a2299fdd751d2b552b91.apk
 
 Login to the app by: email - test@gmail.com, password - 123456
-or sign up your own account
+or sign up with your own account
 
 ## App demo
 
